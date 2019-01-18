@@ -7,16 +7,24 @@ namespace Collections
 {
     class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Calls all the methods
+        /// </summary>
+        /// <param name="args"></param>
+        public static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            PutCardsInDeck();
-            UserInterface();
+            Deck<Card> deck = PutCardsInDeck();
+            UserInterface(deck);
 
 
         }
 
-        public static void UserInterface()
+        /// <summary>
+        /// Allows user to choose options
+        /// </summary>
+        /// <param name="deck">Deck of Cards</param>
+        public static void UserInterface(Deck<Card> deck)
         {
             //interface is running
 
@@ -45,7 +53,7 @@ namespace Collections
                             case 1:
                                 Deck<Card> mDeck = PutCardsInDeck();
 
-                                RemoveFromDeck(mDeck);
+                                RemoveFromDeck(deck);
                                 Console.WriteLine();
                                 Console.WriteLine();
 
@@ -53,14 +61,14 @@ namespace Collections
 
                             case 2:
                                 Deck<Card> myDeck = PutCardsInDeck();
-                                PrintAllCards(myDeck);
+                                PrintAllCards(deck);
                                 Console.WriteLine();
                                 Console.WriteLine();
                                 break;
 
                             case 3:
-                                Deck<Card> myDeckDeal = PutCardsInDeck();
-                                Deal(myDeckDeal);
+                                
+                                Deal(deck);
                                 break;
 
                             default:
@@ -73,7 +81,7 @@ namespace Collections
                     {
                         Console.WriteLine("Please Choose a valid option, press enter to continue");
                         Console.ReadLine();
-                        UserInterface();
+                        UserInterface(deck);
 
                     }
                 }
@@ -84,9 +92,13 @@ namespace Collections
             }
         }
 
-
+        /// <summary>
+        /// Creates new cards and puts them in the deck
+        /// </summary>
+        /// <returns>A deck of card</returns>
         public static Deck<Card> PutCardsInDeck()
         {
+            //Making new cards
             Card cardOne = new Card();
             cardOne.CardSuit = CardSuites.Hearts;
             cardOne.CardValue = CardValues.Ace;
@@ -133,7 +145,7 @@ namespace Collections
 
 
 
-
+            //Putting cards in deck
             Deck<Card> deck = new Deck<Card>();
             deck.Add(cardOne);
             deck.Add(cardTwo);
@@ -151,6 +163,10 @@ namespace Collections
             
         }
 
+        /// <summary>
+        /// Prints all cards to the console
+        /// </summary>
+        /// <param name="deck">A deck of cards</param>
         public static void PrintAllCards(Deck<Card> deck)
         {
             Console.WriteLine("The Cards in the dearler's deck");
@@ -161,6 +177,10 @@ namespace Collections
             }
         }
 
+        /// <summary>
+        /// Deals cards to 2 players
+        /// </summary>
+        /// <param name="deck">Deck of cards</param>
         public static void Deal(Deck<Card> deck)
         {
             Console.WriteLine("Player one deck: empty");
@@ -173,6 +193,7 @@ namespace Collections
             Console.WriteLine();
             Console.WriteLine("Player one cards");
 
+            //Deals to first player
             for (int i = 0; i < 5; i++)
             {
                 playerOne[i] = deck.internalItems[i];
@@ -186,6 +207,7 @@ namespace Collections
             Console.WriteLine("Player two cards");
             int counter = 0;  
             
+            //Deals to second player
             for (int i = 5; i < 10; i++)
             {
                 
@@ -196,9 +218,9 @@ namespace Collections
             Console.WriteLine();
             Card[] LeftInDeck = new Card[5];
             int counter2 = 0;
-            Console.WriteLine("Card left in dea;er's deck");
+            Console.WriteLine("Card left in dealer's deck");
             
-
+            //Shows cards left in deck
             for (int i = 10; i < 11; i++)
             {
                 LeftInDeck[counter2] = deck.internalItems[i];
@@ -208,6 +230,10 @@ namespace Collections
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// Removes one card from deck
+        /// </summary>
+        /// <param name="deck">A deck of cards</param>
         public static void RemoveFromDeck(Deck<Card> deck)
         {
             for (int i = 0; i < deck.currentIndex; i++)
@@ -222,13 +248,16 @@ namespace Collections
             Console.WriteLine();
             Console.WriteLine();
 
+            deck.CardsInDeck();
+
             for (int i = 0; i < deck.currentIndex; i++)
             {
                 Console.Write($"{deck.internalItems[i].CardSuit} {deck.internalItems[i].CardValue}, ");
 
             }
             Console.WriteLine();
-
+            Console.WriteLine();
+            Console.WriteLine();
         }
          
     }

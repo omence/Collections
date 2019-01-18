@@ -70,6 +70,29 @@ namespace XUnitTestProject1
             Assert.Equal(heart, cardOne.CardSuit);
         }
 
-        
+        [Fact]
+        public void RemoveWorks()
+        {
+            //Arrange
+            Card cardOne = new Card();
+            cardOne.CardSuit = CardSuites.Hearts;
+            cardOne.CardValue = CardValues.Ace;
+
+            Card cardTwo = new Card();
+            cardTwo.CardSuit = CardSuites.Diamonds;
+            cardTwo.CardValue = CardValues.Five;
+
+            Deck<Card> deck = new Deck<Card>();
+            deck.Add(cardOne);
+            deck.Add(cardTwo);
+
+            
+            //act
+            deck.RemoveCards();
+            //assert
+
+            Assert.DoesNotContain(cardTwo, deck);
+        }
+
     }
 }
